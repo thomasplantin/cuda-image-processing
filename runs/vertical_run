@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH -J a # job name
+#SBATCH -o a.res%j # output and error file name (%j expands to jobID)
+#SBATCH -n 1 # total number of mpi tasks requested
+#SBATCH -N 1 # total number of nodes
+#SBATCH -p gtx # queue (partition) -- gtx v100 or p100 
+#SBATCH -t 00:01:00 # run time (hh:mm:ss) - change time for job here
+#SBATCH -A EE-382C-EE-361C-Mult
+
+module load cuda
+
+module load gcc/7.3.0
+
+cuda-memcheck ./a.out images/lena_rgb.png output_images/vertical_lena.png vflip single
